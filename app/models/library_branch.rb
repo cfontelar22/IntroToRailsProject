@@ -1,0 +1,2 @@
+class LibraryBranch < ApplicationRecord
+end
