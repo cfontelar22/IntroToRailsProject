@@ -1,3 +1,8 @@
 class LibraryBranch < ApplicationRecord
     has_many :books
-end
+
+    #Validations
+    validates :name, presence: true, uniqueness: true
+    validates :location, presence: true
+  end
+  
