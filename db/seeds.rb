@@ -19,25 +19,30 @@ Weather.delete_all
 end
 
 # OpenWeatherMap API for Weather
-cities = ['New York', 'Los Angeles', 'Chicago']
+cities = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix', 'Philadelphia', 'San Antonio', 'San Diego', 'Dallas', 'San Jose']
 cities.each do |city|
   response = HTTParty.get("https://api.openweathermap.org/data/2.5/weather?q=#{city}&appid=#{ENV['OPENWEATHERMAP_API_KEY']}&units=metric")
+  
   if response.success?
     data = response.parsed_response
     Weather.create!(
-      location: data['name'],
+      location: "#{data['name']}, #{data['sys']['country']}",
       temperature: data['main']['temp'],
       humidity: data['main']['humidity'],
-      # Include other attributes as needed
+      wind_speed: data['wind']['speed'].to_f # Ensuring wind_speed is a float
     )
   else
-    puts "Error fetching weather data for #{city}"
+    puts "Error fetching weather data for #{city}: #{response.body}"
   end
 end
 
 # CSV for Library Data
 CSV.foreach(Rails.root.join('lib/seeds/library_data.csv'), headers: true) do |row|
-  library_branch = LibraryBranch.find_or_create_by!(name: row['Library Name'], location: row['Library Location'])
+  library_branch = LibraryBranch.find_or_create_by!(
+    name: row['Library Name'], 
+    location: row['Library Location']
+  )
+  
   Book.create!(
     title: row['Title'],
     author: row['Author'],
@@ -48,4 +53,7 @@ CSV.foreach(Rails.root.join('lib/seeds/library_data.csv'), headers: true) do |ro
 end
 
 puts "Database seeded successfully!"
-cd ..
+puts "Users count: #{User.count}"
+puts "Weather records count: #{Weather.count}"
+puts "Books count: #{Book.count}"
+puts "Library branches count: #{LibraryBranch.count}"
