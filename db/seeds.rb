@@ -57,3 +57,8 @@ puts "Users count: #{User.count}"
 puts "Weather records count: #{Weather.count}"
 puts "Books count: #{Book.count}"
 puts "Library branches count: #{LibraryBranch.count}"
+
+user = User.first
+book = Book.first
+
+Review.create!(content: "Great read!", user: user, book: book)

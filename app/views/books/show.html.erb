@@ -1,0 +1,12 @@
+<h1><%= @book.title %></h1>
+<p>Author: <%= @book.author %></p>
+<p>Genre: <%= @book.genre %></p>
+
+<p>Library Branch: <%= @book.library_branch.name %></p>
+
+<h3>Reviews</h3>
+<ul>
+  <% @book.reviews.each do |review| %>
+    <li><%= review.content %> - <%= review.user.name %></li>
+  <% end %>
+</ul>
