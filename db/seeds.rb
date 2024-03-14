@@ -1,5 +1,3 @@
-# db/seeds.rb
-
 require 'faker'
 require 'httparty'
 require 'csv'
@@ -11,25 +9,27 @@ LibraryBranch.delete_all
 Weather.delete_all
 
 # Faker for Users
-100.times do
+100.times do |i|
   User.create!(
     name: Faker::Name.name,
-    email: Faker::Internet.email
+    email: Faker::Internet.unique.email
   )
+rescue ActiveRecord::RecordInvalid => e
+  puts "Failed to create user #{i}: #{e.message}"
 end
 
 # OpenWeatherMap API for Weather
 cities = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix', 'Philadelphia', 'San Antonio', 'San Diego', 'Dallas', 'San Jose']
 cities.each do |city|
   response = HTTParty.get("https://api.openweathermap.org/data/2.5/weather?q=#{city}&appid=#{ENV['OPENWEATHERMAP_API_KEY']}&units=metric")
-  
+
   if response.success?
     data = response.parsed_response
     Weather.create!(
       location: "#{data['name']}, #{data['sys']['country']}",
       temperature: data['main']['temp'],
       humidity: data['main']['humidity'],
-      wind_speed: data['wind']['speed'].to_f # Ensuring wind_speed is a float
+      wind_speed: data['wind']['speed'].to_f
     )
   else
     puts "Error fetching weather data for #{city}: #{response.body}"
@@ -52,13 +52,23 @@ CSV.foreach(Rails.root.join('lib/seeds/library_data.csv'), headers: true) do |ro
   )
 end
 
+# Creating reviews assuming User and Book exist
+if User.any? && Book.any?
+  review_user = User.first
+  review_book = Book.first
+  
+  Review.create!(
+    content: "Great read!",
+    user: review_user,
+    book: review_book
+  )
+else
+  puts "No users or books available to create reviews."
+end
+
 puts "Database seeded successfully!"
 puts "Users count: #{User.count}"
 puts "Weather records count: #{Weather.count}"
 puts "Books count: #{Book.count}"
 puts "Library branches count: #{LibraryBranch.count}"
-
-user = User.first
-book = Book.first
-
-Review.create!(content: "Great read!", user: user, book: book)
+puts "Reviews count: #{Review.count}"

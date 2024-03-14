@@ -1,9 +1,9 @@
 <h1><%= @book.title %></h1>
 <p>Author: <%= @book.author %></p>
 <p>Genre: <%= @book.genre %></p>
+<p>Library Branch: <%= link_to @book.library_branch.name, library_branch_path(@book.library_branch) %></p>
 
-<p>Library Branch: <%= @book.library_branch.name %></p>
-
+<!-- Display associated reviews -->
 <h3>Reviews</h3>
 <ul>
   <% @book.reviews.each do |review| %>

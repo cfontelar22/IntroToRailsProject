@@ -5,6 +5,6 @@ class BooksController < ApplicationController
   
 
   def show
-    @book = Book.find(params[:id]) 
+    @book = Book.includes(:library_branch, :reviews).find(params[:id])
   end
 end
