@@ -5,6 +5,7 @@ ruby "3.1.2"
 gem "httparty"
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'faker'
+gem 'kaminari'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
