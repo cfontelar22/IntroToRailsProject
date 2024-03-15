@@ -7,5 +7,9 @@ class Book < ApplicationRecord
   #Validations
   validates :title, presence: true
   validates :author, presence: true
-  
-end
+
+  def self.search(query)
+    where('LOWER(title) LIKE LOWER(:query) OR LOWER(author) LIKE LOWER(:query) OR LOWER(genre) LIKE LOWER(:query)', query: "%#{query.downcase}%")
+  end
+end  
+

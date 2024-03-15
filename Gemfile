@@ -6,6 +6,8 @@ gem "httparty"
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'faker'
 gem 'kaminari'
+gem 'geocoder'
+gem 'will_paginate'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"

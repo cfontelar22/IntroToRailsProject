@@ -14,20 +14,3 @@
 <%= image_tag('ERD.png', alt: 'Entity Relationship Diagram') %> 
 
 
-<!-- Add Mapbox CSS -->
-<link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
-<!-- Add Mapbox JS -->
-<script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
-
-<div id='map' style='width: 600px; height: 400px;'></div>
-
-<script>
-  mapboxgl.accessToken = 'pk.eyJ1IjoiZm9udGVsYXJjaiIsImEiOiJjbHRya3UxZ3owN3puMnJwaW9zczNuYnZyIn0.lVEyzieDPflukT_oP2FzeA'; // Replace with your Mapbox access token
-  var map = new mapboxgl.Map({
-    container: 'map', // The container ID
-    style: 'mapbox://styles/mapbox/streets-v11', // The map style to use
-    center: [-98.5795, 39.8283], // Starting position [lng, lat] - Center of the USA
-    zoom: 3 // Starting zoom level
-  });
-</script>
-

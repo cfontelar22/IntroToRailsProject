@@ -1,29 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>IntroToRails</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>IntroToRails</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-    
-    <!-- Add Mapbox CSS -->
-    <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
-    
-    <!-- Add Mapbox JS -->
-    <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
-    
-  </head>
-  </head>
+  <%= stylesheet_link_tag 'application', 'data-turbo-track': 'reload' %>
+  <%= javascript_importmap_tags %>
 
-  <body>
+  <!-- Add Mapbox CSS -->
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
+
+  <!-- Add Mapbox JS -->
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
+  
+
+</head>
+
+<body>
   <nav>
     <%= link_to 'Home', root_path %> |
     <%= link_to 'About', about_path %> |
     <%= link_to 'Books', books_path %>
   </nav>
+  <%= render 'shared/search_form' %>
   <%= yield %>
 </body>
 </html>

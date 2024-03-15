@@ -1,2 +1,9 @@
-<h1>Welcome to my Library</h1>
-<p>This is the home page.</p>
+<h1>Welcome to my Library!</h1>
+
+<% if Book.any? %>
+  <p>We have <%= Book.count %> amazing books for you to explore. Check out our collection!</p>
+  <% random_book = Book.order("RANDOM()").first %>
+  <p>Why not start with a recommendation? Take a look at "<%= random_book.title %>" by <%= random_book.author %>.</p>
+<% else %>
+  <p>This is the home page. Our collection is currently empty, but we will have a great selection of books for you soon!</p>
+<% end %>

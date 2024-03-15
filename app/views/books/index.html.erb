@@ -1,5 +1,12 @@
+
+<% if @books.present? %>
+  <% @books.each do |book| %>
+  <% end %>
+<% else %>
+  <p>No results found.</p>
+<% end %>
+
 <h1>Books Collection</h1>
-<%= paginate @books %>
 <table>
   <thead>
     <tr>
@@ -18,3 +25,4 @@
     <% end %>
   </tbody>
 </table>
+

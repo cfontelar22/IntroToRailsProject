@@ -1,0 +1,19 @@
+<h1><%= @library_branch.name %></h1>
+<p>Location: <%= @library_branch.location %></p>
+
+<div id='map' style='width: 600px; height: 300px;'></div>
+
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1IjoiZm9udGVsYXJjaiIsImEiOiJjbHRya3UxZ3owN3puMnJwaW9zczNuYnZyIn0.lVEyzieDPflukT_oP2FzeA'; 
+  var map = new mapboxgl.Map({
+    container: 'map', // The container ID
+    style: 'mapbox://styles/mapbox/streets-v11', // The map style to use
+    center: [-98.5795, 39.8283], // Starting position [lng, lat] - Center of the USA
+    zoom: 3 // Starting zoom level
+  });
+
+  new mapboxgl.Marker()
+    .setLngLat([<%= @library_branch.longitude %>, <%= @library_branch.latitude %>])
+    .addTo(map);
+</script>
+
